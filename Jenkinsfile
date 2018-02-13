@@ -4,11 +4,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 retry(3) {
-                    bat '.\flakey-deploy.bat'
+                    bat './flakey-deploy.bat'
                 }
 
                 timeout(time: 3, unit: 'MINUTES') {
-                    bat '.\health-check.bat'
+                    bat './health-check.bat'
                 }
             }
         }
