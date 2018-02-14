@@ -1,22 +1,29 @@
+Jenkinsfile (Declarative Pipeline)
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('No-op') {
             steps {
-                bat ':/gradlew build'
-            }
-        }
-        stage('Test') {
-            steps {
-                bat ':/gradlew check'
+                bat 'ls'
             }
         }
     }
-
     post {
         always {
-            archiveArtifacts artifacts: 'build/libs/test/test.jar', fingerprint: true
-            junit 'build/reports/test_report/test_report.xml'
+            echo 'One way or another, I have finished'
+            deleteDir() /* clean up our workspace */
+        }
+        success {
+            echo 'I succeeeded!'
+        }
+        unstable {
+            echo 'I am unstable :/'
+        }
+        failure {
+            echo 'I failed :('
+        }
+        changed {
+            echo 'Things were different before...'
         }
     }
 }
