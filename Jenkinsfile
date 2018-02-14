@@ -1,10 +1,9 @@
 pipeline {
-    agent any
+    agent {runas docker 'python:3.5.1' }
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                bat 'runas docker pull python:3.5.1'
-                bat 'python --version'
+                sh 'python --version'
             }
         }
     }
