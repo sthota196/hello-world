@@ -1,13 +1,9 @@
 pipeline {
-    agent any
+    agent { docker 'python:3.5.1' }
     stages {
-        stage('Deploy') {
+        stage('build') {
             steps {
-                timeout(time: 3, unit: 'MINUTES') {
-                    retry(5) {
-                        bat ':/flakey-deploy.sh'
-                    }
-                }
+                bat 'python --version'
             }
         }
     }
