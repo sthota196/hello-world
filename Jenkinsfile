@@ -1,9 +1,15 @@
 pipeline {
-    agent { docker 'python:3.5.1' }
+    agent any
+
+    environment {
+        DISABLE_AUTH = 'true'
+        DB_ENGINE    = 'sqlite'
+    }
+
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                bat 'python --version'
+                bat 'printenv'
             }
         }
     }
