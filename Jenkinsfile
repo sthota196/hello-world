@@ -8,7 +8,7 @@ pipeline {
                 }
 
                 timeout(time: 3, unit: 'MINUTES') {
-                    bat './health-check.sh'
+                    sh './health-check.sh'
                 }
             }
         }
